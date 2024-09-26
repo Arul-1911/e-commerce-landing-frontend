@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Row, Col, Skeleton } from "antd";
+import { Button, Card, Row, Col, Skeleton, Modal } from "antd";
 import axios from "axios";
 
 const Category = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState(""); // State for selected category
+  const [isModalVisible, setIsModalVisible] = useState(false); // State for modal visibility
+  const [selectedProduct, setSelectedProduct] = useState(null); // State for selected product
 
   const fetchProducts = async (category = "") => {
     try {
@@ -33,9 +35,20 @@ const Category = () => {
     fetchProducts(category); // Fetch products for the selected category
   };
 
+  // Handle card click to show modal with product details
+  const handleCardClick = (product) => {
+    setSelectedProduct(product); // Store selected product details
+    setIsModalVisible(true); // Show the modal
+  };
+
+  // Close the modal
+  const handleModalClose = () => {
+    setIsModalVisible(false); // Hide the modal
+  };
+
   // Style for selected category button
   const getButtonStyle = (category) => ({
-    backgroundColor: selectedCategory === category ? " #003d29" : "white",
+    backgroundColor: selectedCategory === category ? "#003d29" : "white",
     color: selectedCategory === category ? "white" : "black",
     borderColor: selectedCategory === category ? "darkgreen" : "lightgray",
   });
@@ -103,13 +116,14 @@ const Category = () => {
                   <Card
                     style={{
                       width: "100%",
-                      borderColor: " #003d29",
+                      borderColor: "#003d29",
                     }}
                     cover={
                       <img
                         alt={product.title}
                         src={product.image}
                         className="product-card-image"
+                        onClick={() => handleCardClick(product)} // Handle card click
                       />
                     }
                     className="product-card"
@@ -117,12 +131,52 @@ const Category = () => {
                     <hr />
                     <Card.Meta title={product.title} />
                     <p>{`Price: $${product.price}`}</p>
-                    <button className="add-to-cart-btn">Add to Cart</button>
+                    <button
+                      className="add-to-cart-btn"
+                      onClick={() => handleCardClick(product)} // Handle card click
+                    >
+                      Add to Cart
+                    </button>
                   </Card>
                 </Col>
               ))}
         </Row>
       </div>
+
+      {/* Modal to show product details */}
+      {selectedProduct && (
+        <Modal
+          title={selectedProduct.title}
+          visible={isModalVisible}
+          onCancel={handleModalClose}
+          footer={null} // No footer for the modal
+        >
+          <div className="modal-main-container">
+            <div className="modal-img-container">
+              <img
+                alt={selectedProduct.title}
+                src={selectedProduct.image}
+                // style={{ width: "100%", marginBottom: "15px" }}
+                className="modal-img"
+              />
+            </div>
+            <div className="modal-desc-container">
+              <p>
+                <strong>Description:</strong> {selectedProduct.description}
+              </p>
+              <p>
+                <strong>Price:</strong> ${selectedProduct.price}
+              </p>
+              <p>
+                <strong>Category:</strong> {selectedProduct.category}
+              </p>
+              <p>
+                <strong>Quantity:</strong> {selectedProduct.quantity}
+              </p>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };

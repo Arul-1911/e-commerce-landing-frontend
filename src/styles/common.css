@@ -122,3 +122,22 @@
 .category-title-btn-container > Button {
   border-radius: 40px;
 }
+
+/* product modal */
+
+.modal-main-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-img {
+  width: 150px;
+  height: 160px;
+  object-fit: contain;
+}
+
+.modal-img-container {
+  height: 100%;
+}
