@@ -95,6 +95,7 @@
   width: 100%;
   object-fit: contain;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .category-main-container {
@@ -115,12 +116,19 @@
   gap: 10px;
 }
 
-.product-card {
-  cursor: pointer;
-}
-
 .category-title-btn-container > Button {
   border-radius: 40px;
+}
+
+.add-to-cart-btn {
+  background-color: #003d29;
+  color: white;
+  border: none;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 5px;
+  place-items: center;
+  cursor: pointer;
 }
 
 /* product modal */
@@ -140,4 +148,46 @@
 
 .modal-img-container {
   height: 100%;
+}
+
+/* what we offer */
+
+.cashback-img-container {
+  height: 350px;
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.cashback-img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.what-we-offer-cards-container {
+  padding: 10px;
+}
+
+.what-we-offer-card-img {
+  height: 280px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.whate-we-offer-card-content-container {
+  background-color: #f5f6f6;
+  height: 150px;
+  padding: 10px;
+}
+
+.offer-card-title {
+  font-weight: bold;
+  font-size: 19px !important;
+  margin-bottom: 10px;
+}
+
+.offer-card-sub-title {
+  font-family: sans-serif;
+  margin-top: 20px;
 }

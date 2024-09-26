@@ -3,6 +3,7 @@ import TopBar from "./components/Top_bar";
 import Header from "./components/Header";
 import HeaderSlider from "./components/Header_slider";
 import Category from "./components/Category";
+import WhatWeOffer from "./components/What_we_offer";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -14,6 +15,7 @@ function App() {
         <Header />
         <HeaderSlider />
         <Category />
+        <WhatWeOffer />
       </div>
     </>
   );

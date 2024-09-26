@@ -11,11 +11,11 @@ const Category = () => {
 
   const fetchProducts = async (category = "") => {
     try {
-      setLoading(true); // Set loading to true before making the API request
+      setLoading(true);
       const response = await axios.get(
         "https://e-commerce-landing-backend.onrender.com/api/products",
         {
-          params: { category }, // Send category as a query param
+          params: { category },
         }
       );
       setProducts(response.data);
@@ -27,7 +27,7 @@ const Category = () => {
   };
 
   useEffect(() => {
-    fetchProducts(); // Fetch products when the component mounts
+    fetchProducts();
   }, []);
 
   const handleCategoryClick = (category) => {
@@ -35,15 +35,14 @@ const Category = () => {
     fetchProducts(category); // Fetch products for the selected category
   };
 
-  // Handle card click to show modal with product details
   const handleCardClick = (product) => {
     setSelectedProduct(product); // Store selected product details
-    setIsModalVisible(true); // Show the modal
+    setIsModalVisible(true);
   };
 
   // Close the modal
   const handleModalClose = () => {
-    setIsModalVisible(false); // Hide the modal
+    setIsModalVisible(false);
   };
 
   // Style for selected category button
@@ -94,8 +93,7 @@ const Category = () => {
       <div className="category-card-container">
         <Row gutter={[16, 16]}>
           {loading
-            ? // Show skeletons while loading
-              Array.from({ length: 3 }).map((_, index) => (
+            ? Array.from({ length: 3 }).map((_, index) => (
                 <Col key={index} xs={24} sm={12} md={8} lg={8}>
                   <Skeleton.Image
                     active
@@ -104,8 +102,7 @@ const Category = () => {
                   <Skeleton active paragraph={{ rows: 2 }} />
                 </Col>
               ))
-            : // Show products after loading is complete
-              products.map((product) => (
+            : products.map((product) => (
                 <Col
                   key={product._id}
                   xs={24} // Full width on extra small screens
@@ -123,7 +120,7 @@ const Category = () => {
                         alt={product.title}
                         src={product.image}
                         className="product-card-image"
-                        onClick={() => handleCardClick(product)} // Handle card click
+                        onClick={() => handleCardClick(product)}
                       />
                     }
                     className="product-card"
@@ -131,12 +128,7 @@ const Category = () => {
                     <hr />
                     <Card.Meta title={product.title} />
                     <p>{`Price: $${product.price}`}</p>
-                    <button
-                      className="add-to-cart-btn"
-                      onClick={() => handleCardClick(product)} // Handle card click
-                    >
-                      Add to Cart
-                    </button>
+                    <button className="add-to-cart-btn">Add to Cart</button>
                   </Card>
                 </Col>
               ))}
@@ -149,14 +141,13 @@ const Category = () => {
           title={selectedProduct.title}
           visible={isModalVisible}
           onCancel={handleModalClose}
-          footer={null} // No footer for the modal
+          footer={null}
         >
           <div className="modal-main-container">
             <div className="modal-img-container">
               <img
                 alt={selectedProduct.title}
                 src={selectedProduct.image}
-                // style={{ width: "100%", marginBottom: "15px" }}
                 className="modal-img"
               />
             </div>
