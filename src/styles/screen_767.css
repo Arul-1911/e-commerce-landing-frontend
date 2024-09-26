@@ -1,2 +1,55 @@
 @media only screen and (min-width: 0px) and (max-width: 767px) {
+  .top-bar-shop-now-container {
+    display: none;
+  }
+
+  .deals-text,
+  .whats-new-text,
+  .delivery-text {
+    display: none;
+  }
+  .header-account-cart-container {
+    display: none;
+  }
+
+  .img-logo {
+    width: 90%;
+  }
+
+  .header-slider-img,
+  .header-slider-container {
+    height: 250px;
+    margin-top: 10px;
+  }
+
+  .category-title-btn-container {
+    width: 90%;
+    gap: 10px;
+    justify-content: space-around;
+  }
+
+  .product-card {
+    border: 2px solid gray;
+  }
+
+  .footer-section {
+    padding: 0px;
+  }
+
+  .cashback-img-container {
+    height: 150px;
+    margin: 15px 0px;
+  }
+
+  .cashback-img {
+    object-fit: cover;
+  }
+
+  .skeleton-img {
+    width: 300px !important;
+  }
+
+  .modal-main-container {
+    flex-direction: column;
+  }
 }

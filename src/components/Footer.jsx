@@ -79,7 +79,7 @@ const Footer = () => {
         </Row>
       </div>
       <div className="footer-bottom">
-        <p>&copy; 2024 Your E-commerce Platform. All Rights Reserved.</p>
+        <p>&copy; 2024 Shopcart E-commerce Platform. All Rights Reserved.</p>
       </div>
     </footer>
   );

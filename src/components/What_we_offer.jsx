@@ -7,7 +7,7 @@ const WhatWeOffer = () => {
   return (
     <>
       <div className="what-we-offer-main-container">
-        <h2 style={{ margin: "10px" }}>What We Offer</h2>
+        {/* <h2 style={{ margin: "10px" }}>What We Offer</h2> */}
         <div className="cashback-img-container">
           <img
             src={cashback_img}

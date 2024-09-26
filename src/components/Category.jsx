@@ -97,7 +97,8 @@ const Category = () => {
                 <Col key={index} xs={24} sm={12} md={8} lg={8}>
                   <Skeleton.Image
                     active
-                    style={{ width: "400px", height: 200 }}
+                    // style={{ width: "400px", height: 200 }}
+                    className="skeleton-img"
                   />
                   <Skeleton active paragraph={{ rows: 2 }} />
                 </Col>

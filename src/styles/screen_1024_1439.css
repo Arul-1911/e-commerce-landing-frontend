@@ -1,2 +1,12 @@
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .category-title-btn-container {
+    width: 60%;
+  }
+  .shopcart-img-and-text-container {
+    width: 45%;
+  }
+
+  .header-search-container {
+    width: 30%;
+  }
 }

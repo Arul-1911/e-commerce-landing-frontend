@@ -1,2 +1,26 @@
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .deals-text,
+  .whats-new-text,
+  .delivery-text {
+    display: none;
+  }
+
+  .category-title-btn-container {
+    width: 70%;
+  }
+
+  .header-slider-img,
+  .header-slider-container {
+    height: 350px;
+    margin-top: 10px;
+  }
+
+  .skeleton-img {
+    height: 300px !important;
+    width: 200px !important;
+  }
+
+  .modal-main-container {
+    flex-direction: column;
+  }
 }
