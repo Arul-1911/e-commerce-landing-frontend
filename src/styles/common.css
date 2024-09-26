@@ -131,6 +131,10 @@
   cursor: pointer;
 }
 
+.product-card:hover {
+  border: 2px solid #003d29;
+}
+
 /* product modal */
 
 .modal-main-container {

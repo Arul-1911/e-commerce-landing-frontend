@@ -113,7 +113,6 @@ const Category = () => {
                   <Card
                     style={{
                       width: "100%",
-                      borderColor: "#003d29",
                     }}
                     cover={
                       <img
