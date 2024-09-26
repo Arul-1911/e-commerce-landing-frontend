@@ -91,7 +91,34 @@
 /* cateogry */
 
 .product-card-image {
-  height: 200px;
+  height: 300px;
   width: 100%;
   object-fit: contain;
+  margin-top: 10px;
+}
+
+.category-main-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  padding: 20px;
+}
+
+.category-title-btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 35%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.product-card {
+  cursor: pointer;
+}
+
+.category-title-btn-container > Button {
+  border-radius: 40px;
 }

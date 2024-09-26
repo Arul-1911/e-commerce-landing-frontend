@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Row, Col } from "antd";
+import { Button, Card, Row, Col, Skeleton } from "antd";
 import axios from "axios";
 
 const Category = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState(""); // State for selected category
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (category = "") => {
     try {
+      setLoading(true); // Set loading to true before making the API request
       const response = await axios.get(
-        "https://e-commerce-landing-backend.onrender.com/api/products"
+        "https://e-commerce-landing-backend.onrender.com/api/products",
+        {
+          params: { category }, // Send category as a query param
+        }
       );
       setProducts(response.data);
-      setLoading(false);
+      setLoading(false); // Stop loading once data is fetched
     } catch (error) {
       console.error("Error fetching products:", error);
       setLoading(false);
@@ -20,12 +25,20 @@ const Category = () => {
   };
 
   useEffect(() => {
-    fetchProducts(); // Call async function inside useEffect
+    fetchProducts(); // Fetch products when the component mounts
   }, []);
 
-  if (loading) {
-    return <p>Loading products...</p>;
-  }
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category); // Update selected category state
+    fetchProducts(category); // Fetch products for the selected category
+  };
+
+  // Style for selected category button
+  const getButtonStyle = (category) => ({
+    backgroundColor: selectedCategory === category ? " #003d29" : "white",
+    color: selectedCategory === category ? "white" : "black",
+    borderColor: selectedCategory === category ? "darkgreen" : "lightgray",
+  });
 
   return (
     <div className="category-main-container">
@@ -33,46 +46,81 @@ const Category = () => {
         <h2>Top Categories for you!</h2>
       </div>
       <div className="category-title-btn-container">
-        <Button>All</Button>
-        <Button>Clothing</Button>
-        <Button>Sports</Button>
-        <Button>Home Appliances</Button>
-        <Button>Electronics</Button>
+        <Button
+          onClick={() => handleCategoryClick("")}
+          style={getButtonStyle("")}
+        >
+          All
+        </Button>
+        <Button
+          onClick={() => handleCategoryClick("Clothing")}
+          style={getButtonStyle("Clothing")}
+        >
+          Clothing
+        </Button>
+        <Button
+          onClick={() => handleCategoryClick("Sports")}
+          style={getButtonStyle("Sports")}
+        >
+          Sports
+        </Button>
+        <Button
+          onClick={() => handleCategoryClick("Home Appliances")}
+          style={getButtonStyle("Home Appliances")}
+        >
+          Home Appliances
+        </Button>
+        <Button
+          onClick={() => handleCategoryClick("Electronics")}
+          style={getButtonStyle("Electronics")}
+        >
+          Electronics
+        </Button>
       </div>
+
       <div className="category-card-container">
         <Row gutter={[16, 16]}>
-          {products.map((product) => (
-            <Col
-              key={product._id}
-              xs={24} // Full width on extra small screens
-              sm={12} // Half width on small screens
-              md={8} // Third width on medium screens
-              lg={8} // Quarter width on large screens
-            >
-              <Card
-                style={{
-                  width: "100%",
-                  // backgroundColor: "gray",
-                }}
-                cover={
-                  <img
-                    alt={product.title}
-                    src={product.image}
-                    className="product-card-image"
+          {loading
+            ? // Show skeletons while loading
+              Array.from({ length: 3 }).map((_, index) => (
+                <Col key={index} xs={24} sm={12} md={8} lg={8}>
+                  <Skeleton.Image
+                    active
+                    style={{ width: "400px", height: 200 }}
                   />
-                }
-                loading={loading}
-              >
-                <hr />
-                <Card.Meta
-                  title={product.title}
-                  // description={`Price: $${product.price}`}
-                />
-                <p>{`Price: $${product.price}`}</p>
-                <Button>Add to Cart</Button>
-              </Card>
-            </Col>
-          ))}
+                  <Skeleton active paragraph={{ rows: 2 }} />
+                </Col>
+              ))
+            : // Show products after loading is complete
+              products.map((product) => (
+                <Col
+                  key={product._id}
+                  xs={24} // Full width on extra small screens
+                  sm={12} // Half width on small screens
+                  md={8} // Third width on medium screens
+                  lg={8} // Quarter width on large screens
+                >
+                  <Card
+                    style={{
+                      width: "100%",
+                      borderColor: " #003d29",
+                    }}
+                    cover={
+                      <img
+                        alt={product.title}
+                        src={product.image}
+                        className="product-card-image"
+                      />
+                    }
+                    className="product-card"
+                  >
+                    <hr />
+                    <Card.Meta title={product.title} />
+                    <p>{`Price: $${product.price}`}</p>
+                    <button className="add-to-cart-btn">Add to Cart</button>
+                  </Card>
+                </Col>
+              ))}
         </Row>
       </div>
     </div>
